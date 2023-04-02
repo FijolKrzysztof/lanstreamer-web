@@ -8,8 +8,10 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {AuthenticationComponent} from './components/authentication/authentication.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
+  {path: '', component: HomePageComponent},
   {path: 'authentication/:id', component: AuthenticationComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -19,6 +21,7 @@ const routes: Routes = [
     AppComponent,
     PageNotFoundComponent,
     AuthenticationComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,

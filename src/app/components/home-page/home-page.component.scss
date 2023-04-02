@@ -1,0 +1,105 @@
+@import "node_modules/rfs/scss";
+
+.container-fluid {
+  background-color: #f5f5f5;
+
+  h1 {
+
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: center;
+
+    .text {
+      @include font-size(2rem);
+      //font-size: 2em;
+      //line-height: 2rem;
+    }
+
+    .image {
+      border-radius: 10px;
+      box-shadow: 0 0 5px #000;
+      object-fit: contain;
+      width: 40vw;
+      height: fit-content;
+    }
+  }
+}
+
+.title {
+  @include font-size(1.6rem);
+  font-weight: bold;
+}
+
+.download {
+
+  &-container {
+    @include padding(100px);
+
+    border-radius: 10px;
+    background-color: #ebebe9;
+    height: fit-content;
+    max-width: 700px;
+  }
+
+  &-text {
+    @include font-size(1.5rem);
+
+    font-weight: 400;
+  }
+
+  &-button {
+    padding: 20px;
+  }
+
+  &-design {
+
+    &-outer {
+      display: flex;
+      justify-content: center;
+      width: 50%;
+    }
+
+    &-container {
+      position: relative;
+      width: 450px;
+
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
+
+    &-image {
+      position: absolute;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #000;
+      object-fit: contain;
+      height: fit-content;
+    }
+
+    &-preview {
+      z-index: 3;
+      width: 300px;
+      right: 30px;
+    }
+
+    &-videos {
+      width: 230px;
+      z-index: 2;
+      right: 190px;
+      top: 150px;
+    }
+
+    &-sorting {
+      width: 150px;
+      z-index: 1;
+      right: 60px;
+      top: 170px;
+    }
+  }
+}
+
+.about-text {
+  @include font-size(1.5rem);
+}
