@@ -17,6 +17,25 @@ $animation-gap: 0.3s;
 
 .container-fluid {
   background-color: #f5f5f5;
+  font-size: 24px;
+  line-height: 26px;
+
+  @media (max-width: 1140px) {
+    font-size: 20px;
+    line-height: 22px;
+  }
+  @media (max-width: 992px) {
+    font-size: 18px;
+    line-height: 20px;
+  }
+  @media (max-width: 768px) {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  @media (max-width: 576px) {
+    font-size: 12px;
+    line-height: 14px;
+  }
 }
 
 .animation {
@@ -32,16 +51,22 @@ $animation-gap: 0.3s;
 }
 
 .title {
-  @include font-size(1.6rem);
+  font-size: 1em;
+  line-height: 1em;
   font-weight: bold;
+  margin: 0;
 }
 
 .download {
 
+  &-outer {
+    margin: 2.5em;
+  }
+
   &-container {
     @include show-animation(calc($animation-gap * 1));
-    @include padding(100px);
 
+    padding: 5vw;
     border-radius: 10px;
     background-color: #ebebe9;
     height: fit-content;
@@ -49,13 +74,33 @@ $animation-gap: 0.3s;
   }
 
   &-text {
-    @include font-size(1.5rem);
-
+    font-size: 1em;
     font-weight: 400;
+    text-align: center;
+  }
+
+  &-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
   }
 
   &-button {
-    padding: 20px;
+    flex: 1;
+
+    @media (max-width: 576px) {
+      font-size: .8em;
+      height: 30px;
+      min-width: unset;
+    }
+
+    @media (min-width: 576px) {
+      &:before {
+        content: 'Download for\00a0';
+      }
+      min-width: 220px;
+    }
   }
 
   &-design {
@@ -65,6 +110,7 @@ $animation-gap: 0.3s;
 
       position: relative;
       width: 450px;
+      margin-left: 100px;
 
       @media (max-width: 992px) {
         display: none;
@@ -104,7 +150,15 @@ $animation-gap: 0.3s;
   }
 }
 
-.about-text {
-  @include show-animation(calc($animation-gap * 4));
-  @include font-size(1.5rem);
+.about {
+
+  &-container {
+    margin: 2.5em;
+  }
+
+  &-text {
+    @include show-animation(calc($animation-gap * 4));
+
+    font-size: 1em;
+  }
 }
