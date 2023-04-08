@@ -3,7 +3,8 @@
   <div class="row justify-content-center">
     <div class="col-10">
 
-      <h1 class="title animation-1 text-center">Introducing Lanstreamer - The Ultimate Offline Video Streaming Application!</h1>
+      <h1 class="title animation-1 text-center">Introducing Lanstreamer - The Ultimate Offline Video Streaming
+        Application!</h1>
 
     </div>
   </div>
@@ -11,33 +12,36 @@
   <div class="row justify-content-center download-outer ms-lg-5">
     <div class="col-lg-6 col-md-8 col-11 download-container">
 
-      <p class="download-text">Try Lanstreamer today and take your offline video streaming experience to the next level!</p>
+      <p class="download-text">Try Lanstreamer today and take your offline video streaming experience to the next
+        level!</p>
 
       <div class="row download-actions">
 
-          <button
-            class="download-button"
-            mat-raised-button
-            [disabled]="downloadDisabled"
-            (click)="download('windows')"
-          >Windows
-          </button>
+        <button
+          class="download-button"
+          mat-raised-button
+          [disabled]="downloadDisabled"
+          (click)="download('windows')"
+        >Windows
+        </button>
 
-          <button
-            class="download-button"
-            mat-raised-button
-            [disabled]="downloadDisabled"
-            (click)="download('linux')"
-          >Linux
-          </button>
+        <button
+          class="download-button"
+          mat-raised-button
+          [disabled]="downloadDisabled"
+          (click)="download('linux')"
+        >Linux
+        </button>
 
       </div>
     </div>
     <div class="col-6 row justify-content-center">
       <div class="download-design-container">
-        <img class="download-design-image download-design-preview" src="assets/preview.jpg" alt="preview">
-        <img class="download-design-image download-design-videos" src="assets/videos.jpg" alt="videos">
-        <img class="download-design-image download-design-sorting" src="assets/sorting.jpg" alt="sorting">
+        <img class="download-design-image download-design-preview" src="../../../assets/images/preview.jpg"
+             alt="preview">
+        <img class="download-design-image download-design-videos" src="../../../assets/images/videos.jpg" alt="videos">
+        <img class="download-design-image download-design-sorting" src="../../../assets/images/sorting.jpg"
+             alt="sorting">
       </div>
     </div>
   </div>
@@ -47,25 +51,91 @@
   <div class="row">
     <div class="col about-container">
 
-      <p class="text-center about-text">Lanstreamer is the ultimate solution for organizing and viewing your offline video collection. With Lanstreamer, you can create thumbnails and sort your videos by name, date, or length. Plus, Lanstreamer lets you preview your videos simply by hovering your mouse over the thumbnail, so you can quickly and easily find the video you're looking for.</p>
+      <p class="text-center about-text">Lanstreamer is the ultimate solution for organizing and viewing your offline
+        video collection. With Lanstreamer, you can create thumbnails and sort your videos by name, date, or length.
+        Plus, Lanstreamer lets you preview your videos simply by hovering your mouse over the thumbnail, so you can
+        quickly and easily find the video you're looking for.</p>
 
     </div>
   </div>
 
   <h1 class="title animation-3 text-center">Why should you choose Lanstreamer?</h1>
 
-  <div class="content-container p-md-5">
-    <img class="image" src="assets/preview.jpg" alt="preview">
-    <p class="text">Are you tired of constantly scouring the internet for your favorite videos, only to find them taken down or unavailable for streaming? Look no further than Lanstreamer, the ultimate solution for <b>organizing</b> and <b>viewing</b> your offline video collection.</p>
-  </div>
+  <mat-tab-group
+    (selectedTabChange)="onTabChange()"
+    (mouseleave)="automaticTabSwitch = true"
+    (mouseenter)="automaticTabSwitch = false"
+    animationDuration="1000"
+    class="presentation-tab-group"
+  >
+    <mat-tab label="It has preview">
 
-  <div class="content-container">
-    <p class="text">With Lanstreamer, you can <b>create thumbnails</b> and <b>sort</b> your <b>videos</b> by name, date, or length. This makes it easy to find exactly what you're looking for without the hassle of scrolling through endless file names. Plus, Lanstreamer even lets you <b>preview</b> your videos simply <b>by hovering your mouse over</b> the thumbnail, so you can quickly and easily find the video you're looking for.</p>
-    <img class="image" src="assets/videos.jpg" alt="videos">
-  </div>
+      <div class="presentation-container">
+        <div class="presentation-videos">
+          <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+            <source src="assets/videos/preview_.mp4" type="video/mp4">
+          </video>
+          <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+            <source src="assets/videos/video-preview_.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
 
-  <div class="content-container">
-    <img class="image" src="assets/sorting.jpg" alt="sorting">
-    <p class="text">But that's not all! With Lanstreamer, you can watch your videos directly from the application, without having to go through the hassle of opening up a media player. Whether you're on a long flight or simply disconnected from the internet, Lanstreamer gives you the freedom to enjoy your offline video collection anytime, anywhere.</p>
-  </div>
+    </mat-tab>
+    <mat-tab label="poster creation">
+
+      <div class="presentation-container">
+        <div class="presentation-videos">
+          <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+            <source src="assets/videos/poster_.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="sorting">
+
+      <div class="presentation-container">
+        <div class="presentation-videos">
+          <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+            <source src="assets/videos/sorting_.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="viewing analytics">
+
+      <div class="presentation-container">
+        <div class="presentation-videos">
+          <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+            <source src="assets/videos/stats_.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="video rename">
+
+      <div class="presentation-container">
+        <div class="presentation-videos">
+          <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+            <source src="assets/videos/rename_.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="and other features...">
+
+      <div class="presentation-container">
+        <div class="presentation-videos">
+          <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+            <source src="assets/videos/choosing_many_vids_.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
 </div>
