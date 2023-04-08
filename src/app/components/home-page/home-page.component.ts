@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {HomePageService} from "./home-page.service";
-import {Subject, takeUntil} from "rxjs";
+import {catchError, filter, of, Subject, switchMap, takeUntil} from "rxjs";
 import {MatTabGroup} from "@angular/material/tabs";
 import {ActivatedRoute} from "@angular/router";
 
@@ -11,17 +11,12 @@ export type DownloadType = 'linux' | 'windows';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements AfterViewInit, OnDestroy {
+export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private readonly homePageService: HomePageService,
     private readonly route: ActivatedRoute,
   ) {
-    this.route.queryParams.subscribe(queryParams => {
-      if ('ref' in queryParams) {
-        this.homePageService.sendReferrer(queryParams.ref);
-      }
-    })
   }
 
   @ViewChild(MatTabGroup) matTabGroup!: MatTabGroup;
@@ -31,6 +26,20 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
   downloadDisabled!: boolean;
   automaticTabSwitch = true;
   automaticSwitchStep = 1;
+
+  ngOnInit() {
+    this.route.queryParams
+      .pipe(
+        filter(params => 'ref' in params),
+        switchMap(params => this.homePageService.sendReferrer(params.ref)),
+        catchError(err => {
+          console.error(err);
+          return of(err);
+        }),
+        takeUntil(this._subscriptionKiller),
+      )
+      .subscribe();
+  }
 
   ngAfterViewInit() {
     setTimeout(() => {
