@@ -13,6 +13,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
+  {path: 'ref?=', pathMatch: 'prefix', component: HomePageComponent},
   {path: 'authentication/:id', component: AuthenticationComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

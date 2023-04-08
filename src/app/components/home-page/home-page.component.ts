@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import {HomePageService} from "./home-page.service";
 import {Subject, takeUntil} from "rxjs";
 import {MatTabGroup} from "@angular/material/tabs";
+import {ActivatedRoute} from "@angular/router";
 
 export type DownloadType = 'linux' | 'windows';
 
@@ -13,8 +14,14 @@ export type DownloadType = 'linux' | 'windows';
 export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   constructor(
-    private homePageService: HomePageService,
+    private readonly homePageService: HomePageService,
+    private readonly route: ActivatedRoute,
   ) {
+    this.route.queryParams.subscribe(queryParams => {
+      if ('ref' in queryParams) {
+        this.homePageService.sendReferrer(queryParams.ref);
+      }
+    })
   }
 
   @ViewChild(MatTabGroup) matTabGroup!: MatTabGroup;
@@ -27,7 +34,7 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      // setInterval(() => {
+      setInterval(() => {
         if (this.automaticTabSwitch) {
           const tabGroup = this.matTabGroup;
           const tabCount = tabGroup._tabs.length;
@@ -39,7 +46,7 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
           }
           this.matTabGroup.selectedIndex = (this.matTabGroup.selectedIndex! + this.automaticSwitchStep);
         }
-      // }, 3000)
+      }, 3000)
     }, 6000)
   }
 
