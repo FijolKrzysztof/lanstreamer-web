@@ -9,6 +9,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {AuthenticationComponent} from './components/authentication/authentication.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
     MatButtonModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

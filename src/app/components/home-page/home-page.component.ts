@@ -1,6 +1,7 @@
-import {Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import {HomePageService} from "./home-page.service";
 import {Subject, takeUntil} from "rxjs";
+import {MatTabGroup} from "@angular/material/tabs";
 
 export type DownloadType = 'linux' | 'windows';
 
@@ -9,16 +10,38 @@ export type DownloadType = 'linux' | 'windows';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnDestroy {
+export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private homePageService: HomePageService,
   ) {
   }
 
+  @ViewChild(MatTabGroup) matTabGroup!: MatTabGroup;
+
   private _subscriptionKiller = new Subject<void>();
 
   downloadDisabled!: boolean;
+  automaticTabSwitch = true;
+  automaticSwitchStep = 1;
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      // setInterval(() => {
+        if (this.automaticTabSwitch) {
+          const tabGroup = this.matTabGroup;
+          const tabCount = tabGroup._tabs.length;
+          if ((tabGroup.selectedIndex! + 1) === tabCount) {
+            this.automaticSwitchStep = -1;
+          }
+          if (tabGroup.selectedIndex === 0) {
+            this.automaticSwitchStep = 1;
+          }
+          this.matTabGroup.selectedIndex = (this.matTabGroup.selectedIndex! + this.automaticSwitchStep);
+        }
+      // }, 3000)
+    }, 6000)
+  }
 
   ngOnDestroy() {
     this._subscriptionKiller.next();
@@ -54,5 +77,15 @@ export class HomePageComponent implements OnDestroy {
           document.body.style.cursor = 'auto';
         }
       })
+  }
+
+  onTabChange() {
+    const videoPlayers = document.getElementsByClassName('presentation-video');
+    for (const videoPlayerKey in videoPlayers) {
+      const videoPlayer: HTMLVideoElement = videoPlayers[videoPlayerKey] as HTMLVideoElement;
+      if (typeof videoPlayer.play !== 'undefined') {
+        videoPlayer.play().catch(err => console.error(err));
+      }
+    }
   }
 }
