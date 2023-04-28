@@ -19,6 +19,6 @@ export class HomePageService {
   }
 
   sendReferrer(referrer: string): Observable<void> {
-    return this.http.post<void>(`${environment.serverURL}/api/main/referrer/${referrer}`, null);
+    return this.http.post<void>(`${environment.serverURL}/api/main/referrer`, {name: referrer});
   }
 }
