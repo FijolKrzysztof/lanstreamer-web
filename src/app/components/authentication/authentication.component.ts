@@ -25,6 +25,15 @@ export class AuthenticationComponent implements AfterViewInit, OnDestroy {
   message = 'Authenticate via Google to access Lanstreamer';
 
   ngAfterViewInit() {
+    this.initializeGoogleButton();
+  }
+
+  ngOnDestroy() {
+    this.subscriptionKiller.next(null);
+    this.subscriptionKiller.complete();
+  }
+
+  private initializeGoogleButton(): void {
     try {
       setTimeout(() => {
         const gAccounts: accounts = google.accounts;
@@ -47,12 +56,8 @@ export class AuthenticationComponent implements AfterViewInit, OnDestroy {
       }, 100)
     } catch (e) {
       console.error(e);
+      this.initializeGoogleButton();
     }
-  }
-
-  ngOnDestroy() {
-    this.subscriptionKiller.next(null);
-    this.subscriptionKiller.complete();
   }
 
   private login(credential: CredentialResponse) {
