@@ -6,5 +6,10 @@ RUN npm run build
 
 FROM nginx:latest
 COPY ./nginx.conf /etc/nginx/nginx.conf
+
+COPY ./privkey.pem /etc/nginx/
+COPY ./fullchain.pem /etc/nginx/
+
 COPY --from=build /usr/local/app/dist/lanstreamer-web /usr/share/nginx/html
-EXPOSE 80
+
+EXPOSE 443
