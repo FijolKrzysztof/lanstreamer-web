@@ -10,6 +10,7 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 import {AuthenticationComponent} from './components/authentication/authentication.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatIconModule} from "@angular/material/icon";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -25,14 +26,15 @@ const routes: Routes = [
     AuthenticationComponent,
     HomePageComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
-    MatTabsModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(routes),
+        MatTabsModule,
+        MatIconModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
