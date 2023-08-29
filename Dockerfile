@@ -2,7 +2,7 @@ FROM node:18-alpine as build
 WORKDIR /usr/local/app
 COPY ./ /usr/local/app/
 RUN npm install --force
-RUN npm run build
+RUN npm run build:prod
 
 FROM nginx:latest
 COPY ./nginx.conf /etc/nginx/nginx.conf
