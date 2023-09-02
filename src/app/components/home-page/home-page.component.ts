@@ -121,6 +121,7 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        this.homePageService.sendFeedback(result).pipe(takeUntil(this.subscriptionKiller)).subscribe();
         this.snackBar.open('Thank you for your feedback!', '', {
           duration: 2000,
           verticalPosition: 'top',
