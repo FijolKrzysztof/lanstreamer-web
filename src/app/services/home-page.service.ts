@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {DownloadType} from "./home-page.component";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {EnvService} from "../../env.service";
+import {EnvService} from "./env.service";
+
+export type DownloadType = 'linux' | 'windows';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,4 @@
-<div class="container-fluid pt-5">
+<div class="container-fluid pt-5" #mainContainer>
 
   <div class="row justify-content-center">
     <div class="col-10">
@@ -144,6 +144,8 @@
 
       <mat-icon class="info-icon">email</mat-icon>
       <div class="info-text">support@lanstreamer.com</div>
+
+      <button class="info-feedback-button" (click)="onGiveFeedbackClick()" mat-button>Give us feedback</button>
 
     </div>
   </div>
