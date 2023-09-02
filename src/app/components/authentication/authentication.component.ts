@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, NgZone, OnDestroy} from '@angular/core';
 import {Router} from "@angular/router";
-import {AuthenticationService} from "./authentication.service";
+import {AuthenticationService} from "../../services/authentication.service";
 import {accounts, CredentialResponse} from "google-one-tap";
 import {environment} from "../../../environments/environment";
 import {catchError, filter, Subject, switchMap, takeUntil} from "rxjs";

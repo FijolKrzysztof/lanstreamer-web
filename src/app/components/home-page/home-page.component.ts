@@ -1,19 +1,24 @@
-import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
-import {HomePageService} from "./home-page.service";
+import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {DownloadType, HomePageService} from "../../services/home-page.service";
 import {first, Subject, takeUntil} from "rxjs";
 import {MatTabGroup} from "@angular/material/tabs";
-
-export type DownloadType = 'linux' | 'windows';
+import {MatDialog} from "@angular/material/dialog";
+import {OnLeaveModalComponent} from "./modals/on-leave-modal/on-leave-modal.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {LocalStorageProperties} from "./enums/local-storage-properties";
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly homePageService: HomePageService,
+    private readonly renderer: Renderer2,
+    private readonly dialog: MatDialog,
+    private readonly snackBar: MatSnackBar,
   ) {
     const referrer = document.referrer;
     if (referrer) {
@@ -21,35 +26,26 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @ViewChild(MatTabGroup) matTabGroup!: MatTabGroup;
+  @ViewChild('mainContainer', {read: ElementRef})
+  private readonly mainContainer!: ElementRef;
 
-  private _subscriptionKiller = new Subject<void>();
+  @ViewChild(MatTabGroup)
+  private readonly matTabGroup!: MatTabGroup;
+
+  private readonly subscriptionKiller = new Subject<void>();
 
   downloadDisabled!: boolean;
   automaticTabSwitch = true;
   automaticSwitchStep = 1;
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      setInterval(() => {
-        if (this.automaticTabSwitch) {
-          const tabGroup = this.matTabGroup;
-          const tabCount = tabGroup._tabs.length;
-          if ((tabGroup.selectedIndex! + 1) === tabCount) {
-            this.automaticSwitchStep = -1;
-          }
-          if (tabGroup.selectedIndex === 0) {
-            this.automaticSwitchStep = 1;
-          }
-          this.matTabGroup.selectedIndex = (this.matTabGroup.selectedIndex! + this.automaticSwitchStep);
-        }
-      }, 3000)
-    }, 6000)
+    this.animateTabs();
+    this.showModalOnLeave();
   }
 
   ngOnDestroy() {
-    this._subscriptionKiller.next();
-    this._subscriptionKiller.complete();
+    this.subscriptionKiller.next();
+    this.subscriptionKiller.complete();
   }
 
   download(type: DownloadType) {
@@ -58,7 +54,7 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
     this.homePageService.getDownloadLink(type)
       .pipe(
-        takeUntil(this._subscriptionKiller),
+        takeUntil(this.subscriptionKiller),
       )
       .subscribe({
         next: (downloadLink: any) => {
@@ -73,6 +69,7 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
           setTimeout(() => {
             document.body.removeChild(link);
+            localStorage.setItem(LocalStorageProperties.DOWNLOADED, JSON.stringify(true));
           });
         },
         error: (err) => {
@@ -91,5 +88,60 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
         videoPlayer.play().catch(err => console.error(err));
       }
     }
+  }
+
+  private animateTabs(): void {
+    setTimeout(() => {
+      setInterval(() => {
+        if (this.automaticTabSwitch) {
+          const tabGroup = this.matTabGroup;
+          const tabCount = tabGroup._tabs.length;
+          if ((tabGroup.selectedIndex! + 1) === tabCount) {
+            this.automaticSwitchStep = -1;
+          }
+          if (tabGroup.selectedIndex === 0) {
+            this.automaticSwitchStep = 1;
+          }
+          this.matTabGroup.selectedIndex = (this.matTabGroup.selectedIndex! + this.automaticSwitchStep);
+        }
+      }, 3000)
+    }, 6000)
+  }
+
+  onGiveFeedbackClick() {
+    this.openModal('What can be improved?')
+  }
+
+  private openModal(message: string): void {
+    const dialogRef = this.dialog.open(OnLeaveModalComponent, {
+      width: '90vw',
+      maxWidth: '400px',
+      data: message,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.snackBar.open('Thank you for your feedback!', '', {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'left'
+        });
+        localStorage.setItem(LocalStorageProperties.PROVIDED_FEEDBACK, JSON.stringify(true));
+      }
+    });
+  }
+
+  private showModalOnLeave(): void {
+    this.renderer.listen(this.mainContainer.nativeElement, 'mouseleave', () => {
+      const providedFeedbackItem = localStorage.getItem(LocalStorageProperties.PROVIDED_FEEDBACK);
+      const downloadedItem = localStorage.getItem(LocalStorageProperties.DOWNLOADED);
+
+      const providedFeedback = providedFeedbackItem ? JSON.parse(providedFeedbackItem) : null;
+      const downloaded = downloadedItem ? JSON.parse(downloadedItem) : null;
+
+      if (!providedFeedback && !downloaded) {
+        this.openModal("Why don't you like the app?")
+      }
+    });
   }
 }

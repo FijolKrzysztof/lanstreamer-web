@@ -1,0 +1,30 @@
+.on-leave-modal {
+  .mat-mdc-dialog-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  mat-dialog-content {
+    padding-bottom: 0 !important;
+
+    mat-form-field {
+      width: 100%;
+
+      .mdc-text-field {
+        background: white;
+
+        .mat-mdc-form-field-focus-overlay {
+          opacity: 0;
+        }
+      }
+
+      .mat-mdc-form-field-subscript-wrapper {
+        height: 0;
+      }
+    }
+  }
+
+  mat-dialog-actions {
+    margin-right: 10px;
+  }
+}
