@@ -38,6 +38,16 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
   automaticTabSwitch = true;
   automaticSwitchStep = 1;
 
+  get downloaded(): boolean {
+    const downloadedItem = localStorage.getItem(LocalStorageProperties.DOWNLOADED);
+    return downloadedItem ? JSON.parse(downloadedItem) : false;
+  }
+
+  get providedFeedback(): boolean {
+    const providedFeedbackItem = localStorage.getItem(LocalStorageProperties.PROVIDED_FEEDBACK);
+    return  providedFeedbackItem ? JSON.parse(providedFeedbackItem) : false;
+  }
+
   ngAfterViewInit() {
     this.animateTabs();
     this.showModalOnLeave();
@@ -90,6 +100,10 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  onGiveFeedbackClick() {
+    this.openModal('Please, give us your feedback')
+  }
+
   private animateTabs(): void {
     setTimeout(() => {
       setInterval(() => {
@@ -108,10 +122,6 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
     }, 6000)
   }
 
-  onGiveFeedbackClick() {
-    this.openModal('What can be improved?')
-  }
-
   private openModal(message: string): void {
     const dialogRef = this.dialog.open(OnLeaveModalComponent, {
       width: '90vw',
@@ -124,8 +134,7 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
         this.homePageService.sendFeedback(result).pipe(takeUntil(this.subscriptionKiller)).subscribe();
         this.snackBar.open('Thank you for your feedback!', '', {
           duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'left'
+          verticalPosition: 'bottom',
         });
         localStorage.setItem(LocalStorageProperties.PROVIDED_FEEDBACK, JSON.stringify(true));
       }
@@ -134,14 +143,8 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   private showModalOnLeave(): void {
     this.renderer.listen(this.mainContainer.nativeElement, 'mouseleave', () => {
-      const providedFeedbackItem = localStorage.getItem(LocalStorageProperties.PROVIDED_FEEDBACK);
-      const downloadedItem = localStorage.getItem(LocalStorageProperties.DOWNLOADED);
-
-      const providedFeedback = providedFeedbackItem ? JSON.parse(providedFeedbackItem) : null;
-      const downloaded = downloadedItem ? JSON.parse(downloadedItem) : null;
-
-      if (!providedFeedback && !downloaded) {
-        this.openModal("Why don't you like the app?")
+      if (!this.providedFeedback && !this.downloaded) {
+        this.openModal("Do you like the app? If not - please tell us why")
       }
     });
   }
