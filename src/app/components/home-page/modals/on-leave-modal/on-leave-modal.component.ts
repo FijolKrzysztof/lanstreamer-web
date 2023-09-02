@@ -21,6 +21,6 @@ export class OnLeaveModalComponent {
   readonly formControl = new FormControl();
 
   onSubmit(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close(this.formControl.value);
   }
 }
