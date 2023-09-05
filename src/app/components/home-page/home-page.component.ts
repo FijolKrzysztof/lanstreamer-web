@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild} from '@angular/core';
 import {DownloadType, HomePageService} from "../../services/home-page.service";
 import {first, Subject, takeUntil} from "rxjs";
-import {MatTabGroup} from "@angular/material/tabs";
 import {MatDialog} from "@angular/material/dialog";
 import {OnLeaveModalComponent} from "./modals/on-leave-modal/on-leave-modal.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -29,14 +28,9 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
   @ViewChild('mainContainer', {read: ElementRef})
   private readonly mainContainer!: ElementRef;
 
-  @ViewChild(MatTabGroup)
-  private readonly matTabGroup!: MatTabGroup;
-
   private readonly subscriptionKiller = new Subject<void>();
 
   downloadDisabled!: boolean;
-  automaticTabSwitch = true;
-  automaticSwitchStep = 1;
 
   get downloaded(): boolean {
     const downloadedItem = localStorage.getItem(LocalStorageProperties.DOWNLOADED);
@@ -49,7 +43,6 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.animateTabs();
     this.showModalOnLeave();
   }
 
@@ -102,24 +95,6 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   onGiveFeedbackClick() {
     this.openModal('Please, give us your feedback')
-  }
-
-  private animateTabs(): void {
-    setTimeout(() => {
-      setInterval(() => {
-        if (this.automaticTabSwitch) {
-          const tabGroup = this.matTabGroup;
-          const tabCount = tabGroup._tabs.length;
-          if ((tabGroup.selectedIndex! + 1) === tabCount) {
-            this.automaticSwitchStep = -1;
-          }
-          if (tabGroup.selectedIndex === 0) {
-            this.automaticSwitchStep = 1;
-          }
-          this.matTabGroup.selectedIndex = (this.matTabGroup.selectedIndex! + this.automaticSwitchStep);
-        }
-      }, 3000)
-    }, 6000)
   }
 
   private openModal(message: string): void {
