@@ -1,0 +1,60 @@
+.on-leave-modal-component {
+  @import "../utils";
+
+  .mat-mdc-dialog-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: .6rem;
+
+    @include screen-narrow {
+      font-size: 1rem !important;
+    }
+  }
+
+  mat-dialog-content {
+    padding-bottom: 0 !important;
+
+    mat-form-field {
+      width: 100%;
+
+      .mdc-text-field {
+        background: white;
+        border-bottom: 1px solid black;
+        font-size: .6rem;
+
+        @include screen-wide {
+          font-size: .8rem !important;
+        }
+        @include screen-narrow {
+          font-size: 1rem !important;
+        }
+
+        .mat-mdc-form-field-focus-overlay {
+          opacity: 0;
+        }
+      }
+
+      .mat-mdc-form-field-subscript-wrapper {
+        height: 0;
+      }
+    }
+  }
+
+  mat-dialog-actions {
+    margin-right: 10px;
+
+    .submit-button {
+      font-size: .6rem;
+
+      @include screen-medium {
+        font-size: .7rem;
+      }
+      @include screen-narrow {
+        font-size: .8rem;
+      }
+      @include screen-very-narrow {
+        font-size: 1rem;
+      }
+    }
+  }
+}

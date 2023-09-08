@@ -1,12 +1,10 @@
-import {Component, HostBinding, Inject, ViewEncapsulation} from '@angular/core';
+import {Component, HostBinding, Inject} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-on-leave-modal',
   templateUrl: './on-leave-modal.component.html',
-  styleUrls: ['on-leave-modal.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class OnLeaveModalComponent {
 
@@ -16,7 +14,7 @@ export class OnLeaveModalComponent {
   ) {}
 
   @HostBinding('class')
-  private readonly hostClass = 'on-leave-modal';
+  private readonly hostClass = 'on-leave-modal-component';
 
   readonly formControl = new FormControl();
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostBinding, OnDestroy, Renderer2, ViewChild} from '@angular/core';
 import {DownloadType, HomePageService} from "../../services/home-page.service";
 import {first, Subject, takeUntil} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
@@ -9,7 +9,6 @@ import {LocalStorageProperties} from "./enums/local-storage-properties";
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements AfterViewInit, OnDestroy {
 
@@ -24,6 +23,9 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
       this.homePageService.sendReferrer(referrer).pipe(first()).subscribe();
     }
   }
+
+  @HostBinding('class')
+  private readonly hostClass = 'home-page-component';
 
   @ViewChild('mainContainer', {read: ElementRef})
   private readonly mainContainer!: ElementRef;
