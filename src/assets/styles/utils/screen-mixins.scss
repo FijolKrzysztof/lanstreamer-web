@@ -1,0 +1,38 @@
+@import "screen-sizes";
+
+@mixin screen-very-narrow {
+  @media (max-width: $screen-very-narrow) {
+    @content
+  }
+}
+@mixin screen-narrow {
+  @media (max-width: $screen-narrow) {
+    @content
+  }
+}
+@mixin screen-medium {
+  @media (max-width: $screen-medium) {
+    @content
+  }
+}
+@mixin screen-wide {
+  @media (max-width: $screen-wide) {
+    @content
+  }
+}
+@mixin screen-very-wide {
+  @media (min-width: $screen-wide) {
+    @content
+  }
+}
+
+@mixin screen-narrower-than($width) {
+  @media (max-width: $width) {
+    @content
+  }
+}
+@mixin screen-wider-than($width) {
+  @media (min-width: $width) {
+    @content
+  }
+}
