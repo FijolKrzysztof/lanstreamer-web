@@ -1,0 +1,25 @@
+<div class="col-lg-6 col-md-8 col-11 download-container">
+
+  <p class="download-text">Try Lanstreamer for free and take your offline video streaming experience to the next
+    level!</p>
+
+  <div class="row download-actions">
+
+    <button
+      class="download-button"
+      mat-raised-button
+      [disabled]="downloadDisabled"
+      (click)="download(operatingSystem.Windows)"
+    >Windows
+    </button>
+
+    <button
+      class="download-button"
+      mat-raised-button
+      [disabled]="downloadDisabled"
+      (click)="download(operatingSystem.Linux)"
+    >Linux
+    </button>
+
+  </div>
+</div>

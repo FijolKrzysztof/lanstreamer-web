@@ -110,8 +110,13 @@
   },
   "schematics": {
     "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "skipTests": true,
       "style": "scss"
     }
   },
-  "defaultProject": "lanstreamer-web"
+  "defaultProject": "lanstreamer-web",
+  "cli": {
+    "analytics": false
+  }
 }
