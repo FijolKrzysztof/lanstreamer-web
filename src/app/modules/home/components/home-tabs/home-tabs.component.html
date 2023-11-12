@@ -1,0 +1,80 @@
+
+<h1 class="title animation-3 text-center">Why should you choose Lanstreamer?</h1>
+
+<mat-tab-group
+  (selectedTabChange)="onTabChange()"
+  (mouseleave)="autoTabSwitch = true"
+  (mouseenter)="autoTabSwitch = false"
+  animationDuration="1000"
+  class="presentation-tab-group"
+>
+  <mat-tab label="It has preview">
+
+    <div class="presentation-container">
+      <div class="presentation-videos">
+        <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+          <source src="assets/videos/preview_.mp4" type="video/mp4">
+        </video>
+        <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+          <source src="assets/videos/video-preview_.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="poster creation">
+
+    <div class="presentation-container">
+      <div class="presentation-videos">
+        <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+          <source src="assets/videos/poster_.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="sorting">
+
+    <div class="presentation-container">
+      <div class="presentation-videos">
+        <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+          <source src="assets/videos/sorting_.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="viewing analytics">
+
+    <div class="presentation-container">
+      <div class="presentation-videos">
+        <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+          <source src="assets/videos/stats_.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="video rename">
+
+    <div class="presentation-container">
+      <div class="presentation-videos">
+        <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+          <source src="assets/videos/rename_.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="and other features...">
+
+    <div class="presentation-container">
+      <div class="presentation-videos">
+        <video class="presentation-video" [muted]="true" [loop]="true" [autoplay]="true">
+          <source src="assets/videos/choosing_many_vids_.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>
