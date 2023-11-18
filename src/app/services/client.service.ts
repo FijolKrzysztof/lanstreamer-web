@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ClientDto} from "../data/dto/client-dto";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {EnvService} from "./env.service";
 import {HttpClient} from "@angular/common/http";
 import {OperatingSystem} from "../data/models/enums/operating-system";
@@ -26,6 +26,20 @@ export class ClientService {
 
   update(client: ClientDto): Observable<ClientDto> {
     return this.http.put<ClientDto>(this.baseUrl, client);
+  }
+
+  updateSessionDuration(clientId: number): Observable<void> {
+    const url = `${this.baseUrl}/${clientId}/update-session-duration`;
+
+    if (navigator.sendBeacon) {
+      const result = navigator.sendBeacon(url);
+
+      if (result) {
+        return of();
+      }
+    }
+
+    return this.http.post<void>(url, null);
   }
 
   downloadApp(clientId: number, operatingSystem: OperatingSystem): Observable<string> { // TODO: typ zwracany

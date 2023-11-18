@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, HostListener} from '@angular/core';
 import {HomeDataService} from "./home-data.service";
-import {take} from "rxjs";
+import {switchMap, take} from "rxjs";
 import {ClientService} from "../../services/client.service";
 
 @Component({
@@ -13,6 +13,7 @@ export class HomeComponent {
 
   constructor(
     private readonly clientService: ClientService,
+    private readonly homeDataService: HomeDataService,
   ) {
     this.initializeClient();
   }
@@ -20,7 +21,19 @@ export class HomeComponent {
   @HostBinding('class')
   private readonly hostClass = 'home-page-component';
 
+  @HostListener('window:beforeunload')
+  updateSessionDuration() {
+    this.homeDataService.client
+      .pipe(
+        switchMap(client => this.clientService.updateSessionDuration(client.id)),
+        take(1),
+      )
+      .subscribe();
+  }
+
   private initializeClient(): void {
-    this.clientService.create({id: -1, feedbacks: [], referrerWebsite: document.referrer}).pipe(take(1)).subscribe();
+    this.clientService.create({id: -1, feedbacks: [], referrerWebsite: document.referrer})
+      .pipe(take(1))
+      .subscribe(this.homeDataService.client);
   }
 }

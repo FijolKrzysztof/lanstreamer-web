@@ -38,7 +38,7 @@ export class HomeFooterComponent {
           .pipe(
             take(1),
             map(client => {
-              client?.feedbacks.push(message);
+              client.feedbacks.push(message);
               return client;
             }),
             switchMap(client => this.clientService.update(client!)),
