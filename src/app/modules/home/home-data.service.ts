@@ -4,5 +4,8 @@ import {ClientDto} from "../../data/dto/client-dto";
 
 @Injectable()
 export class HomeDataService {
-  readonly client = new BehaviorSubject<ClientDto | null>(null);
+  readonly client = new BehaviorSubject<ClientDto>({
+    id: -1,
+    feedbacks: []
+  });
 }
