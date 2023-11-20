@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ClientDto} from "../data/dto/client-dto";
 import {Observable, of} from "rxjs";
-import {EnvService} from "./env.service";
+import {ApiService} from "./api.service";
 import {HttpClient} from "@angular/common/http";
 import {OperatingSystem} from "../data/models/enums/operating-system";
 
@@ -11,13 +11,13 @@ import {OperatingSystem} from "../data/models/enums/operating-system";
 export class ClientService {
 
   constructor(
-    private readonly envService: EnvService,
+    private readonly apiService: ApiService,
     private readonly http: HttpClient,
   ) {
   }
 
   get baseUrl(): string {
-    return `${this.envService.baseURL}/api/client`
+    return `${this.apiService.baseURL}/api/client`
   }
 
   create(client: ClientDto): Observable<ClientDto> {

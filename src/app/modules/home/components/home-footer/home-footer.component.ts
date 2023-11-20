@@ -4,7 +4,7 @@ import {ClientService} from "../../../../services/client.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HomeInputDialogComponent} from "../home-input-dialog/home-input-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {HomeDataService} from "../../home-data.service";
+import {HomeDataService} from "../../services/home-data.service";
 
 @Component({
   selector: 'app-home-footer',

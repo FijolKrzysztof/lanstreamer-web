@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {EnvService} from "./env.service";
+import {ApiService} from "./api.service";
 
 export type DownloadType = 'linux' | 'windows';
 
@@ -12,7 +12,7 @@ export class HomePageService {
 
   constructor(
     private http: HttpClient,
-    private envService: EnvService,
+    private envService: ApiService,
   ) {
   }
 
