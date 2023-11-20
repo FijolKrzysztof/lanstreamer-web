@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
 import {catchError, switchMap, take} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
 import {HomeDataService} from "../../services/home-data.service";
@@ -16,6 +16,9 @@ export class HomeDownloadsComponent {
     private readonly homeDataService: HomeDataService,
   ) {
   }
+
+  @HostBinding('class')
+  private readonly className = 'home-downloads-component';
 
   readonly operatingSystem = OperatingSystem;
 

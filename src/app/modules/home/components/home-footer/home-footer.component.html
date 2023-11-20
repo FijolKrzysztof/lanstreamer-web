@@ -1,11 +1,17 @@
 <div class="row mt-5">
-  <div class="col info-container">
+  <div class="col footer-container animation-7">
 
-    <mat-icon class="info-icon">email</mat-icon>
-    <div class="info-text">support@lanstreamer.com</div>
+    <div class="footer-spacer"></div>
 
-    <button class="info-feedback-button"
-            (click)="onGiveFeedbackClick()"
+    <mat-icon class="footer-icon">email</mat-icon>
+    <div class="footer-text">support@lanstreamer.com</div>
+
+    <button class="footer-feedback-button"
+            (click)="onGiveFeedback()"
             mat-button>Give us feedback</button>
+
+    <button mat-icon-button class="footer-login-button" (click)="onLogin()">
+      <mat-icon>login</mat-icon>
+    </button>
   </div>
 </div>

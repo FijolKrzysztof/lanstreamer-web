@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
 
 @Component({
   selector: 'app-home-header',
@@ -6,5 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeHeaderComponent {
-
+  @HostBinding('class')
+  private readonly className = 'home-header-component';
 }

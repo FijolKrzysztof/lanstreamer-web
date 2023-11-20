@@ -1,4 +1,12 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, NgZone} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  NgZone,
+  Output
+} from '@angular/core';
 import {Router} from "@angular/router";
 import {BehaviorSubject, catchError, take} from "rxjs";
 import {accounts, CredentialResponse} from "google-one-tap";
@@ -24,6 +32,12 @@ export class AuthenticationComponent implements AfterViewInit {
     private readonly apiService: ApiService,
   ) {
   }
+
+  @HostBinding('class')
+  private readonly className = 'authentication-component';
+
+  @Output()
+  readonly authenticated = new EventEmitter<boolean>();
 
   readonly message = new BehaviorSubject<string>('Authenticate via Google to access Lanstreamer');
 
@@ -53,7 +67,7 @@ export class AuthenticationComponent implements AfterViewInit {
         });
       }, 100)
     } catch (e) {
-      console.error(e);
+      console.error(e); // TODO: Zamienić na message service
       this.message.next('Something went wrong while loading the Google login button. Please try to reload the page or come back later.')
     }
   }
@@ -68,6 +82,9 @@ export class AuthenticationComponent implements AfterViewInit {
         catchError(err => this.notificationService.handleError(err, 'Authentication failed')),
         take(1),
       )
-      .subscribe(() => this.message.next('Authenticated! You can close the window.'));
+      .subscribe(() => {
+        this.message.next('Authenticated! You can close the window.');
+        this.authenticated.emit(true);
+      });
   }
 }

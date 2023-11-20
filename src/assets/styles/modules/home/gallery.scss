@@ -1,0 +1,47 @@
+@import "../../utils/index";
+
+.home-gallery-component {
+  .gallery {
+
+    &-container {
+      position: relative;
+      width: 450px;
+      margin-left: 100px;
+
+      @include screen-medium {
+        display: none;
+      }
+      @include screen-wider-than(1500px) {
+        transform: scale(1.2);
+      }
+    }
+
+    &-image {
+      position: absolute;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #000;
+      object-fit: contain;
+      height: fit-content;
+
+      &.preview {
+        z-index: 3;
+        width: 300px;
+        right: 30px;
+      }
+
+      &.videos {
+        width: 230px;
+        z-index: 2;
+        right: 190px;
+        top: 150px;
+      }
+
+      &.sorting {
+        width: 150px;
+        z-index: 1;
+        right: 60px;
+        top: 170px;
+      }
+    }
+  }
+}
