@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, HostBinding, HostListener} from '@angular/core';
-import {HomeDataService} from "./home-data.service";
+import {HomeDataService} from "./services/home-data.service";
 import {switchMap, take} from "rxjs";
 import {ClientService} from "../../services/client.service";
 
@@ -30,6 +30,9 @@ export class HomeComponent {
       )
       .subscribe();
   }
+
+  // TODO: dodanie przycisku logowania w footerze prawdopodobnie i jak się zaloguje i będzie admin to przeniesienie do panelu admina
+  //  lub panelu użytkownika kótry teraz będzie tylko panelem admina
 
   private initializeClient(): void {
     this.clientService.create({id: -1, feedbacks: [], referrerWebsite: document.referrer})

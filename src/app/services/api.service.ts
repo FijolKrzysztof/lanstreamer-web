@@ -4,9 +4,11 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class EnvService {
+export class ApiService {
 
   get baseURL(): string {
     return environment.serverURL;
   }
+
+  bearerToken!: string;
 }

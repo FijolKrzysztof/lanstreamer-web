@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TokenInfo} from "../components/authentication/models/token-info";
-import {EnvService} from "./env.service";
+import {ApiService} from "./api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import {EnvService} from "./env.service";
 export class AuthenticationService {
   constructor(
     private http: HttpClient,
-    private envService: EnvService,
+    private envService: ApiService,
   ) { }
 
   authenticate(code: string, mail: string): Observable<void> {

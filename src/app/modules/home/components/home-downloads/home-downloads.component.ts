@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {catchError, switchMap, take} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
-import {HomeDataService} from "../../home-data.service";
+import {HomeDataService} from "../../services/home-data.service";
 import {OperatingSystem} from "../../../../data/models/enums/operating-system";
 
 @Component({

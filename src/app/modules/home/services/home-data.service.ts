@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
-import {ClientDto} from "../../data/dto/client-dto";
+import {ClientDto} from "../../../data/dto/client-dto";
 
 @Injectable()
 export class HomeDataService {

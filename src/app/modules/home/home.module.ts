@@ -14,8 +14,9 @@ import {MatInputModule} from "@angular/material/input";
 import {TextFieldModule} from "@angular/cdk/text-field";
 import {HomeDownloadsComponent} from './components/home-downloads/home-downloads.component';
 import {HomeGalleryComponent} from './components/home-gallery/home-gallery.component';
-import { HomeAboutComponent } from './components/home-about/home-about.component';
-import { HomeHeaderComponent } from './components/home-header/home-header.component';
+import {HomeAboutComponent} from './components/home-about/home-about.component';
+import {HomeHeaderComponent} from './components/home-header/home-header.component';
+import {HomeRoutingModule} from "./home-routing.module";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { HomeHeaderComponent } from './components/home-header/home-header.compon
     MatFormFieldModule,
     MatInputModule,
     TextFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HomeRoutingModule,
   ]
 })
 export class HomeModule { }
