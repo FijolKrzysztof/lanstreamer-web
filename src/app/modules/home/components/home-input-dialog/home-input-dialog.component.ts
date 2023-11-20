@@ -15,7 +15,7 @@ export class HomeInputDialogComponent {
   ) {}
 
   @HostBinding('class')
-  private readonly hostClass = 'on-leave-modal-component';
+  private readonly hostClass = 'home-input-dialog-component';
 
   readonly formControl = new FormControl();
 

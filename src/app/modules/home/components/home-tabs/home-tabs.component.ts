@@ -1,4 +1,11 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  ViewChild
+} from '@angular/core';
 import {MatTabGroup} from "@angular/material/tabs";
 
 @Component({
@@ -7,6 +14,14 @@ import {MatTabGroup} from "@angular/material/tabs";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeTabsComponent implements AfterViewInit {
+
+  constructor(
+    private readonly cdr: ChangeDetectorRef,
+  ) {
+  }
+
+  @HostBinding('class')
+  private readonly homeClass = 'home-tabs-component';
 
   @ViewChild(MatTabGroup)
   private readonly matTabGroup!: MatTabGroup;
@@ -41,6 +56,7 @@ export class HomeTabsComponent implements AfterViewInit {
             this.autoSwitchStep = 1;
           }
           this.matTabGroup.selectedIndex = (this.matTabGroup.selectedIndex! + this.autoSwitchStep);
+          this.cdr.markForCheck();
         }
       }, 3000)
     }, 6000)

@@ -1,0 +1,14 @@
+@import "../../utils/index";
+
+.home-about-component {
+  .about {
+
+    &-container {
+      margin: 2.5rem;
+    }
+
+    &-text {
+      font-size: 1rem;
+    }
+  }
+}

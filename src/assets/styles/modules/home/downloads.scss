@@ -1,0 +1,44 @@
+@import "../../utils/index";
+
+.home-downloads-component {
+  .download {
+
+    &-container {
+      padding: 5vw;
+      border-radius: 10px;
+      background-color: #ebebe9;
+      height: fit-content;
+      max-width: 700px;
+    }
+
+    &-text {
+      font-size: 1rem;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    &-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    &-button {
+      flex: 1;
+
+      @include screen-narrower-than($screen-very-narrow) {
+        font-size: .8rem;
+        height: 30px;
+        min-width: unset;
+      }
+
+      @include screen-wider-than($screen-very-narrow) {
+        &:before {
+          content: 'Download for\00a0';
+        }
+        min-width: 220px;
+      }
+    }
+  }
+}

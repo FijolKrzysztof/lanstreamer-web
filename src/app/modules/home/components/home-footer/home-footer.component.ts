@@ -1,10 +1,15 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
 import {catchError, map, switchMap, take} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HomeInputDialogComponent} from "../home-input-dialog/home-input-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {HomeDataService} from "../../services/home-data.service";
+import {
+  AuthenticationDialogComponent
+} from "../../../authentication/authentication-dialog/authentication-dialog.component";
+import {Router} from "@angular/router";
+import {NotificationService} from "../../../../services/notification.service";
 
 @Component({
   selector: 'app-home-footer',
@@ -18,18 +23,29 @@ export class HomeFooterComponent {
     private readonly snackBar: MatSnackBar,
     private readonly dialog: MatDialog,
     private readonly homeDataService: HomeDataService,
+    private readonly router: Router,
+    private readonly notificationService: NotificationService,
   ) {
   }
 
-  onGiveFeedbackClick() {
-    this.openModal('Please, give us your feedback')
+  @HostBinding('class')
+  private readonly className = 'home-footer-component'
+
+  onLogin(): void {
+    const dialogRef = this.dialog.open(AuthenticationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(authenticated => {
+      if (authenticated) {
+        this.router.navigate(['/test']);
+      }
+    })
   }
 
-  private openModal(title: string): void {
+  onGiveFeedback() {
     const dialogRef = this.dialog.open(HomeInputDialogComponent, {
       width: '90vw',
       maxWidth: '400px',
-      data: title,
+      data: 'Please, give us your feedback',
     });
 
     dialogRef.afterClosed().subscribe((message) => {
@@ -42,7 +58,7 @@ export class HomeFooterComponent {
               return client;
             }),
             switchMap(client => this.clientService.update(client!)),
-            catchError(err => err), // TODO: obsługa błędów
+            catchError(err => this.notificationService.handleError(err, 'Something went wrong')),
           )
           .subscribe(() => {
             this.snackBar.open('Thank you for your feedback!', '', {

@@ -19,7 +19,7 @@ export class HomeComponent {
   }
 
   @HostBinding('class')
-  private readonly hostClass = 'home-page-component';
+  private readonly hostClass = 'home-component';
 
   @HostListener('window:beforeunload')
   updateSessionDuration() {

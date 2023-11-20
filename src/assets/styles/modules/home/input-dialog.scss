@@ -1,6 +1,6 @@
-.on-leave-modal-component {
-  @import "../utils";
+@import "../../utils/index";
 
+.home-input-dialog-component {
   .mat-mdc-dialog-title {
     margin-bottom: 0;
     padding-bottom: 0;

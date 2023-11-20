@@ -1,0 +1,61 @@
+@import "../../utils/index";
+
+.home-footer-component {
+  .footer {
+    &-container {
+      display: flex;
+      background-color: #ebebe9;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+    }
+
+    &-spacer {
+      margin-right: auto;
+    }
+
+    &-text {
+      font-size: .6rem;
+      margin-left: 5px;
+
+      @include screen-narrow {
+        font-size: .8rem;
+        margin-left: 2px;
+      }
+    }
+
+    &-icon {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+
+      @include screen-narrow {
+        font-size: 1.2rem;
+      }
+    }
+
+    &-feedback-button {
+      margin-left: 15px;
+      font-size: .6rem;
+
+      @include screen-narrow {
+        font-size: .8rem;
+      }
+    }
+
+    &-login-button {
+      margin-left: auto;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+
+      .mat-icon {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+      }
+    }
+  }
+}
