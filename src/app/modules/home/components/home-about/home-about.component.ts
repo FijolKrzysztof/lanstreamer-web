@@ -9,3 +9,5 @@ export class HomeAboutComponent {
   @HostBinding('class')
   private readonly className = 'home-about-component';
 }
+
+// TODO: zrobić gdzieś portale - albo w messageService i w popup będzie można przekazać component albo w dialogu
