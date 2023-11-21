@@ -14,6 +14,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {AppRoutingModule} from "./app-routing.module";
 import {PortalModule} from "@angular/cdk/portal";
+import {NotificationPopupModule} from "./shared/notification-popup/notification-popup.module";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {PortalModule} from "@angular/cdk/portal";
     ReactiveFormsModule,
     AppRoutingModule,
     PortalModule,
+    NotificationPopupModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

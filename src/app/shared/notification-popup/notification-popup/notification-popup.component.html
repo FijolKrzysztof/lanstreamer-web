@@ -1,0 +1,9 @@
+<div class="popup-container">
+<!--  <div [cdkPortalOutlet]="portalOutlet"></div>-->
+  <ng-container>
+    <ng-template [cdkPortalOutlet]="portalOutlet"></ng-template>
+  </ng-container>
+  <p>notification-popup works!</p>
+  <div>{{showSomething}}</div>
+  <button mat-raised-button (click)="onClick()">click me</button>
+</div>
