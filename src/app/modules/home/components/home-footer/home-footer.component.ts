@@ -58,7 +58,7 @@ export class HomeFooterComponent {
               return client;
             }),
             switchMap(client => this.clientService.update(client!)),
-            catchError(err => this.notificationService.handleError(err, 'Something went wrong')),
+            catchError(err => this.notificationService.handleAndShowError(err, 'Something went wrong!')),
           )
           .subscribe(() => {
             this.snackBar.open('Thank you for your feedback!', '', {

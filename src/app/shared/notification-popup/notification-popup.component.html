@@ -1,0 +1,6 @@
+<div class="popup-container">
+  <button class="popup-close-button" mat-mini-fab [color]="config?.theme" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div [cdkPortalOutlet]="portalOutlet"></div>
+</div>

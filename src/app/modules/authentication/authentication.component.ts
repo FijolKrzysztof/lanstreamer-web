@@ -79,7 +79,7 @@ export class AuthenticationComponent implements AfterViewInit {
 
     this.userService.login({id: -1, accessCode: code})
       .pipe(
-        catchError(err => this.notificationService.handleError(err, 'Authentication failed')),
+        catchError(err => this.notificationService.handleAndShowError(err, 'Authentication failed!')),
         take(1),
       )
       .subscribe(() => {
