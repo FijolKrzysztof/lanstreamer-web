@@ -1,10 +1,45 @@
-.notification-popup-component {
+@keyframes showHidePopup {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+#notification-popup-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+}
+
+.notification-popup-component {
   .popup {
     &-container {
+      position: relative;
       padding: 5px;
-      margin: 5px;
-      background-color: white;
+      margin: 10px;
+      border-radius: 0 5px 5px 0;
+      box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+      background: rgb(244, 67, 54);
+      color: white;
+      animation: showHidePopup 0.5s ease-in-out;
+    }
+
+    &-close-button {
+      position: absolute;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      top: 0;
+      left: -40px;
+      height: 100%;
     }
   }
 }

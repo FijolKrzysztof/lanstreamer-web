@@ -36,7 +36,7 @@ export class HomeDownloadsComponent {
         switchMap(client => this.clientService.downloadApp(client?.id!, os)),
         catchError(err => {
           this.refreshState();
-          return this.notificationService.handleError(err, 'Cannot download file');
+          return this.notificationService.handleAndShowError(err, 'Cannot download file!');
         }),
       )
       .subscribe(() => {

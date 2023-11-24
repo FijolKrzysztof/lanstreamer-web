@@ -1,3 +1,5 @@
+@import "../../utils/index";
+
 .home-component {
   @mixin show-animation($delay) {
     opacity: 0;
@@ -44,6 +46,10 @@
 
   .downloads-gallery-container  {
     margin: 2.5rem;
+
+    @include screen-narrower-than($screen-very-narrow) {
+      margin: 1rem;
+    }
   }
 
   .title {
