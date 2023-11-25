@@ -2,10 +2,9 @@ import {ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, I
 import {NotificationPopupComponent} from "../notification-popup.component";
 import {ComponentPortal} from "@angular/cdk/portal";
 import {Observable, skip} from "rxjs";
-import {ThemePalette} from "@angular/material/core";
 
 export interface NotificationPopupConfig {
-  theme: ThemePalette;
+  type: 'info' | 'warn' | 'error';
 }
 
 @Injectable({

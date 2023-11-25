@@ -1,3 +1,6 @@
+@import "../../../palettes/index";
+@import "../../../utils/index";
+
 @keyframes showHidePopup {
   0% {
     opacity: 0;
@@ -23,17 +26,35 @@
 .notification-popup-component {
   .popup {
     &-container {
+      &.error {
+        @include set-colors($palette-red, 500); // TODO: dostosować kolory
+      }
+      &.warn {
+        @include set-colors($palette-orange, 500);
+      }
+      &.info {
+        @include set-colors($palette-blue, 400);
+      }
+
       position: relative;
       padding: 5px;
       margin: 10px;
       border-radius: 0 5px 5px 0;
       box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-      background: rgb(244, 67, 54);
-      color: white;
       animation: showHidePopup 0.5s ease-in-out;
     }
 
     &-close-button {
+      &.error {
+        @include set-colors($palette-red, 300);
+      }
+      &.warn {
+        @include set-colors($palette-orange, 400);
+      }
+      &.info {
+        @include set-colors($palette-blue, 300);
+      }
+
       position: absolute;
       border-top-right-radius: 0 !important;
       border-bottom-right-radius: 0 !important;

@@ -14,6 +14,7 @@ import {environment} from "../../../environments/environment";
 import {UserService} from "../../services/user.service";
 import {NotificationService} from "../../services/notification.service";
 import {ApiService} from "../../services/api.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 declare var google: any;
 
@@ -67,8 +68,7 @@ export class AuthenticationComponent implements AfterViewInit {
         });
       }, 100)
     } catch (e) {
-      console.error(e); // TODO: Zamienić na message service
-      this.message.next('Something went wrong while loading the Google login button. Please try to reload the page or come back later.')
+      this.notificationService.handleAndShowError(e as HttpErrorResponse, 'Something went wrong while loading the Google login button. Please reload the page or come back later.');
     }
   }
 

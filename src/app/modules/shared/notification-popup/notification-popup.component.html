@@ -1,0 +1,6 @@
+<div class="popup-container" [ngClass]="typeClassObject">
+  <button class="popup-close-button" [ngClass]="typeClassObject" mat-mini-fab (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div [cdkPortalOutlet]="portalOutlet"></div>
+</div>
