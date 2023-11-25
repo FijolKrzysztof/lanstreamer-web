@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
-import {NotificationPopupService} from "../shared/notification-popup/services/notification-popup.service";
+import {NotificationPopupService} from "../modules/shared/notification-popup/services/notification-popup.service";
 import {
   ErrorPopupComponent,
   ErrorPopupData
-} from "../shared/notification-popup/components/error-popup/error-popup.component";
+} from "../modules/shared/notification-popup/components/error-popup/error-popup.component";
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +34,6 @@ export class NotificationService {
   }
 
   private showErrorMessage(data: ErrorPopupData): void {
-    this.notificationPopupService.openNotificationPopup(ErrorPopupComponent, data, {theme: 'warn'}).subscribe();
+    this.notificationPopupService.openNotificationPopup(ErrorPopupComponent, data, {type: 'error'}).subscribe();
   }
 }

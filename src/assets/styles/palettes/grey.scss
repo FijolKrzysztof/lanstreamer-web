@@ -1,0 +1,32 @@
+$palette-grey: (
+  50 : #f0f0f0,
+  100 : #d8d8d8,
+  200 : #bfbfbf,
+  300 : #a5a5a5,
+  400 : #919191, // TODO: ogarnąć home page na podstawie kolorów gray lub palety gray
+  500 : #7e7e7e,
+  600 : #767676,
+  700 : #6b6b6b,
+  800 : #616161,
+  900 : #4e4e4e,
+  A100 : #f8bdbd,
+  A200 : #f38f8f,
+  A400 : #ff5050,
+  A700 : #ff3636,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #ffffff,
+  )
+);
