@@ -15,6 +15,7 @@ import {UserService} from "../../services/user.service";
 import {NotificationService} from "../../services/notification.service";
 import {ApiService} from "../../services/api.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {LoginResponse} from "../../data/dto/responses/login-response";
 
 declare var google: any;
 
@@ -38,7 +39,7 @@ export class AuthenticationComponent implements AfterViewInit {
   private readonly className = 'authentication-component';
 
   @Output()
-  readonly authenticated = new EventEmitter<boolean>();
+  readonly authenticated = new EventEmitter<LoginResponse>();
 
   readonly message = new BehaviorSubject<string>('Authenticate via Google to access Lanstreamer');
 
@@ -82,9 +83,9 @@ export class AuthenticationComponent implements AfterViewInit {
         catchError(err => this.notificationService.handleAndShowError(err, 'Authentication failed!')),
         take(1),
       )
-      .subscribe(() => {
+      .subscribe(response => {
         this.message.next('Authenticated! You can close the window.');
-        this.authenticated.emit(true);
+        this.authenticated.emit(response);
       });
   }
 }

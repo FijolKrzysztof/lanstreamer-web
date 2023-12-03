@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, HostBinding, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {LoginResponse} from "../../../data/dto/responses/login-response";
 
 @Component({
   selector: 'app-authentication-dialog',
@@ -17,7 +18,7 @@ export class AuthenticationDialogComponent {
   @HostBinding('class')
   private readonly className = 'authentication-dialog-component';
 
-  onAuthentication(): void {
-    this.dialogRef.close(true);
+  onAuthentication(response: LoginResponse): void {
+    this.dialogRef.close(response);
   }
 }

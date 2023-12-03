@@ -10,6 +10,7 @@ import {
 } from "../../../authentication/authentication-dialog/authentication-dialog.component";
 import {Router} from "@angular/router";
 import {NotificationService} from "../../../../services/notification.service";
+import {LoginResponse} from "../../../../data/dto/responses/login-response";
 
 @Component({
   selector: 'app-home-footer',
@@ -34,9 +35,9 @@ export class HomeFooterComponent {
   onLogin(): void {
     const dialogRef = this.dialog.open(AuthenticationDialogComponent);
 
-    dialogRef.afterClosed().subscribe(authenticated => {
-      if (authenticated) {
-        this.router.navigate(['/test']);
+    dialogRef.afterClosed().subscribe((response: LoginResponse) => {
+      if (response.roles.includes('Admin')) {
+        this.router.navigate(['/user']).then();
       }
     })
   }

@@ -3,6 +3,7 @@ import {ApiService} from "./api.service";
 import {HttpClient} from "@angular/common/http";
 import {UserDto} from "../data/dto/user-dto";
 import {Observable} from "rxjs";
+import {LoginResponse} from "../data/dto/responses/login-response";
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class UserService {
     return `${this.apiService.baseURL}/api/client`
   }
 
-  public login(user: UserDto): Observable<UserDto> {
-    return this.http.post<UserDto>(`${this.baseUrl}/login`, user);
+  public login(user: UserDto): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, user);
   }
 }
