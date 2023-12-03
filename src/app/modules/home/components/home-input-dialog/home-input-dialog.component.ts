@@ -17,7 +17,7 @@ export class HomeInputDialogComponent {
   @HostBinding('class')
   private readonly hostClass = 'home-input-dialog-component';
 
-  readonly formControl = new FormControl();
+  readonly formControl: FormControl<string> = new FormControl();
 
   onSubmit(): void {
     this.dialogRef.close(this.formControl.value);
