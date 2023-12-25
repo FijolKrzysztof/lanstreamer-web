@@ -3,7 +3,9 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [],
 })
 export class UserComponent {
 

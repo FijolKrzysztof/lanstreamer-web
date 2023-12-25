@@ -17,7 +17,7 @@ export class UserService {
   }
 
   get baseUrl(): string {
-    return `${this.apiService.baseURL}/api/client`
+    return `${this.apiService.baseURL}/api/user`
   }
 
   public login(user: UserDto): Observable<LoginResponse> {

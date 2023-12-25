@@ -6,12 +6,16 @@ import {
   HostBinding,
   ViewChild
 } from '@angular/core';
-import {MatTabGroup} from "@angular/material/tabs";
+import {MatTabGroup, MatTabsModule} from "@angular/material/tabs";
 
 @Component({
   selector: 'app-home-tabs',
   templateUrl: './home-tabs.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatTabsModule
+  ],
 })
 export class HomeTabsComponent implements AfterViewInit {
 

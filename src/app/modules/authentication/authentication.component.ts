@@ -16,13 +16,18 @@ import {NotificationService} from "../../services/notification.service";
 import {ApiService} from "../../services/api.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LoginResponse} from "../../data/dto/responses/login-response";
+import {AsyncPipe} from "@angular/common";
 
 declare var google: any;
 
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    AsyncPipe
+  ],
 })
 export class AuthenticationComponent implements AfterViewInit {
 
@@ -75,6 +80,8 @@ export class AuthenticationComponent implements AfterViewInit {
 
   private login(credentialResponse: CredentialResponse) {
     const code = this.router.url.split('/').pop();
+
+    console.log('response', credentialResponse)
 
     this.apiService.bearerToken = credentialResponse.credential;
 
