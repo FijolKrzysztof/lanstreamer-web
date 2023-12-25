@@ -10,6 +10,7 @@ import {HomeAboutComponent} from "./components/home-about/home-about.component";
 import {HomeTabsComponent} from "./components/home-tabs/home-tabs.component";
 import {HomeFooterComponent} from "./components/home-footer/home-footer.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {ClientDto} from "../../data/dto/client-dto";
 
 @Component({
   selector: 'app-home',
@@ -50,7 +51,7 @@ export class HomeComponent {
   //  lub panelu użytkownika kótry teraz będzie tylko panelem admina
 
   private initializeClient(): void {
-    this.clientService.create({id: -1, feedbacks: [], referrerWebsite: document.referrer ?? null})
+    this.clientService.create({referrerWebsite: document.referrer ?? null} as ClientDto)
       .pipe(
         catchError(err => this.notificationService.handleAndShowError(err, 'Something went wrong!')),
         take(1),
