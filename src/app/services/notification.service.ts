@@ -24,10 +24,12 @@ export class NotificationService {
 
     if (httpError.status === 0) {
       this.showErrorMessage({message, description: 'Server is not responding'});
-    } else if (error.code === 500) { // TODO: tutaj raczej wszystkie kody 500 coś np. 505 itd. powinny iść do tego ifa
+    } else if (httpError.status === 404) {
+      this.showErrorMessage({message, description: error?.message ?? 'Resource not found'});
+    } else if (httpError.status === 500) { // TODO: tutaj raczej wszystkie kody 500 coś np. 505 itd. powinny iść do tego ifa
       this.showErrorMessage({message});
     } else {
-      this.showErrorMessage({message, description: error.message});
+      this.showErrorMessage({message, description: error?.message});
     }
 
     return throwError(() => httpError);

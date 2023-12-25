@@ -10,5 +10,9 @@ export class ApiService {
     return environment.serverURL;
   }
 
+  get authorizationHeader(): { Authorization: string } {
+    return {'Authorization': `Bearer ${this.bearerToken}`}
+  }
+
   bearerToken!: string;
 }
