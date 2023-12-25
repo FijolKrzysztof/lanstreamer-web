@@ -1,2 +1,12 @@
-<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+<div class="container">
+  <button type="button" mat-stroked-button (click)="fileInput.click()">Upload Desktop App</button>
+  <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Operating system</mat-label>
+    <mat-select [formControl]="osControl">
+      <mat-option [value]="OperatingSystem.Windows">Windows</mat-option>
+      <mat-option [value]="OperatingSystem.Linux">Linux</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

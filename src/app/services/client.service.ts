@@ -24,8 +24,8 @@ export class ClientService {
     return this.http.post<ClientDto>(this.baseUrl, client);
   }
 
-  update(client: ClientDto): Observable<ClientDto> {
-    return this.http.put<ClientDto>(this.baseUrl, client);
+  addFeedback(clientId: number, feedback: string) {
+    return this.http.post(`${this.baseUrl}/${clientId}/feedback`, feedback);
   }
 
   updateSessionDuration(clientId: number): void {

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
-import {catchError, map, switchMap, take} from "rxjs";
+import {catchError, switchMap, take} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {HomeInputDialogComponent} from "../home-input-dialog/home-input-dialog.component";
@@ -62,11 +62,7 @@ export class HomeFooterComponent {
         this.homeDataService.client
           .pipe(
             take(1),
-            map(client => {
-              client.feedbacks.push(message);
-              return client;
-            }),
-            switchMap(client => this.clientService.update(client!)),
+            switchMap(client => this.clientService.addFeedback(client.id, message)),
             catchError(err => this.notificationService.handleAndShowError(err, 'Something went wrong!')),
           )
           .subscribe(() => {
