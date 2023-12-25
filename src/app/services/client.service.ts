@@ -2,8 +2,9 @@ import {Injectable} from "@angular/core";
 import {ClientDto} from "../data/dto/client-dto";
 import {Observable} from "rxjs";
 import {ApiService} from "./api.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {OperatingSystem} from "../data/models/enums/operating-system";
+import {CreatedObjResponse} from "../data/dto/responses/created-obj-response";
 
 @Injectable({
   providedIn: 'root'
@@ -20,19 +21,19 @@ export class ClientService {
     return `${this.apiService.baseURL}/api/client`
   }
 
-  create(client: ClientDto): Observable<ClientDto> {
-    return this.http.post<ClientDto>(this.baseUrl, client);
+  create(client: ClientDto): Observable<CreatedObjResponse> {
+    return this.http.post<CreatedObjResponse>(this.baseUrl, client);
   }
 
   addFeedback(clientId: number, feedback: string) {
-    return this.http.post(`${this.baseUrl}/${clientId}/feedback`, feedback);
+    return this.http.post(`${this.baseUrl}/${clientId}/add-feedback`,  `"${feedback}"`, {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
   updateSessionDuration(clientId: number): void {
     navigator.sendBeacon(`${this.baseUrl}/${clientId}/update-session-duration`);
   }
 
-  downloadApp(clientId: number, operatingSystem: OperatingSystem): Observable<string> { // TODO: typ zwracany
-    return this.http.get<string>(`${this.baseUrl}/${clientId}/download-app/${operatingSystem}`);
+  downloadApp(clientId: number, operatingSystem: OperatingSystem): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/${clientId}/download-app/${operatingSystem}`, {responseType: 'blob'});
   }
 }

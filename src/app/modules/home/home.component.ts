@@ -47,15 +47,14 @@ export class HomeComponent {
     this.clientService.updateSessionDuration(clientId);
   }
 
-  // TODO: dodanie przycisku logowania w footerze prawdopodobnie i jak się zaloguje i będzie admin to przeniesienie do panelu admina
-  //  lub panelu użytkownika kótry teraz będzie tylko panelem admina
-
   private initializeClient(): void {
     this.clientService.create({referrerWebsite: document.referrer ?? null} as ClientDto)
       .pipe(
         catchError(err => this.notificationService.handleAndShowError(err, 'Something went wrong!')),
         take(1),
       )
-      .subscribe(this.homeDataService.client);
+      .subscribe(createdObjResponse => {
+        this.homeDataService.client.next({id: createdObjResponse.id});
+      });
   }
 }

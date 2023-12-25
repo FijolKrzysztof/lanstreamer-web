@@ -21,6 +21,6 @@ export class UserService {
   }
 
   public login(user: UserDto): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, user);
+    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, user, {headers: this.apiService.authorizationHeader});
   }
 }

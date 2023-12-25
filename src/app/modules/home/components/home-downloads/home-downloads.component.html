@@ -8,7 +8,7 @@
     <button
       class="download-button"
       mat-raised-button
-      [disabled]="downloadDisabled"
+      [disabled]="(downloadDisabledSubject | async) ?? false"
       (click)="download(operatingSystem.Windows)"
     >Windows
     </button>
@@ -16,7 +16,7 @@
     <button
       class="download-button"
       mat-raised-button
-      [disabled]="downloadDisabled"
+      [disabled]="(downloadDisabledSubject | async) ?? false"
       (click)="download(operatingSystem.Linux)"
     >Linux
     </button>

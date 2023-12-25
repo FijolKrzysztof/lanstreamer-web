@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {OperatingSystem} from "../data/models/enums/operating-system";
 import {Observable} from "rxjs";
 
@@ -24,6 +24,8 @@ export class AdminService {
 
     formData.append('file', file);
 
-    return this.http.post<void>(`${this.baseUrl}/upload-desktop-app/${operatingSystem}`, formData);
+    const params = new HttpParams().set('operatingSystem', operatingSystem);
+
+    return this.http.post<void>(`${this.baseUrl}/upload-desktop-app`, formData, {params, headers: this.apiService.authorizationHeader});
   }
 }

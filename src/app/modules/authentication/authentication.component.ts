@@ -81,8 +81,6 @@ export class AuthenticationComponent implements AfterViewInit {
   private login(credentialResponse: CredentialResponse) {
     const code = this.router.url.split('/').pop();
 
-    console.log('response', credentialResponse)
-
     this.apiService.bearerToken = credentialResponse.credential;
 
     this.userService.login({id: -1, accessCode: code})
