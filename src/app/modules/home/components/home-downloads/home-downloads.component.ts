@@ -4,11 +4,16 @@ import {ClientService} from "../../../../services/client.service";
 import {HomeDataService} from "../../services/home-data.service";
 import {OperatingSystem} from "../../../../data/models/enums/operating-system";
 import {NotificationService} from "../../../../services/notification.service";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-home-downloads',
   templateUrl: './home-downloads.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule
+  ],
 })
 export class HomeDownloadsComponent {
 

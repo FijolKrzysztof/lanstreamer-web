@@ -1,11 +1,17 @@
 import {ChangeDetectionStrategy, Component, HostBinding, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {LoginResponse} from "../../../data/dto/responses/login-response";
+import {AuthenticationComponent} from "../authentication.component";
 
 @Component({
   selector: 'app-authentication-dialog',
   templateUrl: './authentication-dialog.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatDialogModule,
+    AuthenticationComponent
+  ],
 })
 export class AuthenticationDialogComponent {
 

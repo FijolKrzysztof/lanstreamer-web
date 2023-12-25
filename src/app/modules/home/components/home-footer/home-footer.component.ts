@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
 import {catchError, map, switchMap, take} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {HomeInputDialogComponent} from "../home-input-dialog/home-input-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {HomeDataService} from "../../services/home-data.service";
@@ -11,11 +11,19 @@ import {
 import {Router} from "@angular/router";
 import {NotificationService} from "../../../../services/notification.service";
 import {LoginResponse} from "../../../../data/dto/responses/login-response";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-home-footer',
   templateUrl: './home-footer.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
+  ],
 })
 export class HomeFooterComponent {
 
