@@ -16,7 +16,7 @@ export class AdminService {
   }
 
   get baseUrl(): string {
-    return `${this.apiService.baseURL}/api/admin`
+    return `/api/admin`
   }
 
   uploadDesktopApp(operatingSystem: OperatingSystem, file: File): Observable<void> {

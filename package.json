@@ -2,8 +2,8 @@
   "name": "lanstreamer-web",
   "version": "0.0.0",
   "scripts": {
-    "start:prod": "ng serve -c production",
-    "start:dev": "ng serve -c development",
+    "start:dev": "ng serve -c development --proxy-config=proxy.conf.dev.json",
+    "start:prod": "ng serve -c production --proxy-config=proxy.conf.prod.json",
     "build:prod": "ng build -c production",
     "test": "ng test"
   },
