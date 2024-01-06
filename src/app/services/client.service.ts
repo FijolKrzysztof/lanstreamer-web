@@ -33,6 +33,10 @@ export class ClientService {
     navigator.sendBeacon(`${this.baseUrl}/${clientId}/update-session-duration`);
   }
 
+  getDownloadLink(clientId: number, operatingSystem: OperatingSystem): string {
+    return `${this.baseUrl}/${clientId}/download-app/${operatingSystem}`;
+  }
+
   downloadApp(clientId: number, operatingSystem: OperatingSystem): Observable<Blob> {
     return this.http.get(`${this.baseUrl}/${clientId}/download-app/${operatingSystem}`, {responseType: 'blob'});
   }
