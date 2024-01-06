@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
-import {BehaviorSubject, map, take} from "rxjs";
+import {BehaviorSubject, catchError, map, switchMap, take} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
 import {HomeDataService} from "../../services/home-data.service";
 import {OperatingSystem} from "../../../../data/models/enums/operating-system";
@@ -38,22 +38,22 @@ export class HomeDownloadsComponent {
 
     this.homeDataService.client.pipe(
       take(1),
-      map(client => {
-        const url = this.clientService.getDownloadLink(client?.id!, os); // TODO: dodać sprawdzenie czy url jest valid
-        console.log('url', url)
+      map(client => this.clientService.getDownloadLink(client?.id!, os)),
+      switchMap(url => this.clientService.checkFileExists(url)),
+      map(url => {
         const link = document.createElement('a');
         link.href = url;
         link.download = 'lanstreamer.zip';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-      })
-    ).subscribe({
-      complete: () => this.refreshState(),
-      error: err => {
+      }),
+      catchError(err => {
         this.refreshState();
-        this.notificationService.handleAndShowError(err, 'Cannot download file!');
-      }
+        return this.notificationService.handleAndShowError(err, 'Something went wrong!')
+      }),
+    ).subscribe(() => {
+      this.refreshState();
     });
   }
 

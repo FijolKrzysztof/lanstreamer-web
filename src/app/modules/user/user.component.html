@@ -1,6 +1,10 @@
-<div class="container">
-  <button type="button" mat-stroked-button (click)="fileInput.click()">Upload Desktop App</button>
-  <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+<div class="upload-container">
+  <div class="upload-section">
+    <button type="button" mat-stroked-button (click)="fileInput.click()">Upload Desktop App</button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+
+    <mat-spinner *ngIf="loading | async" class="upload-spinner"></mat-spinner>
+  </div>
 
   <mat-form-field appearance="outline">
     <mat-label>Operating system</mat-label>

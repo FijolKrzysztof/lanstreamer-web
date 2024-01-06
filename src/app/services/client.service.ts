@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ClientDto} from "../data/dto/client-dto";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {ApiService} from "./api.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {OperatingSystem} from "../data/models/enums/operating-system";
@@ -33,11 +33,11 @@ export class ClientService {
     navigator.sendBeacon(`${this.baseUrl}/${clientId}/update-session-duration`);
   }
 
-  getDownloadLink(clientId: number, operatingSystem: OperatingSystem): string {
-    return `${this.baseUrl}/${clientId}/download-app/${operatingSystem}`;
+  checkFileExists(url: string): Observable<string> {
+    return this.http.head(url, {observe: 'response'}).pipe(map(() => url))
   }
 
-  downloadApp(clientId: number, operatingSystem: OperatingSystem): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/${clientId}/download-app/${operatingSystem}`, {responseType: 'blob'});
+  getDownloadLink(clientId: number, operatingSystem: OperatingSystem): string {
+    return `${this.baseUrl}/${clientId}/download-app/${operatingSystem}`;
   }
 }
