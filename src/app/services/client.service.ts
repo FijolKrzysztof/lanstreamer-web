@@ -18,7 +18,7 @@ export class ClientService {
   }
 
   get baseUrl(): string {
-    return `${this.apiService.baseURL}/api/client`
+    return `/api/client`
   }
 
   create(client: ClientDto): Observable<CreatedObjResponse> {

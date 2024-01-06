@@ -1,14 +1,11 @@
 import {Injectable} from "@angular/core";
-import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  get baseURL(): string {
-    return environment.serverURL;
-  }
+  // TODO: w lanstramer code jak jest błąd przy połączeniu sse to nie otwierać strony z logiwaniem
 
   get authorizationHeader(): { Authorization: string } {
     return {'Authorization': `Bearer ${this.bearerToken}`}
