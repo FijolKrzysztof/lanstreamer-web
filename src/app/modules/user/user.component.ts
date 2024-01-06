@@ -39,7 +39,9 @@ export class UserComponent {
     this.adminService.uploadDesktopApp(this.osControl.value!, fileInputEvent.target.files[0]).pipe(
       catchError(err => this.notificationService.handleAndShowError(err, 'Something went wrong!')),
       take(1),
-    ).subscribe(); // TODO: dodać potwierdzenie że się udało
+    ).subscribe(); // TODO: dodać potwierdzenie że się udało, oraz ładowanie (spinner)
   }
+
+  // TODO: aplikacja się zbyt wolno pobiera
 
 }

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
-import {BehaviorSubject, catchError, switchMap, take, tap} from "rxjs";
+import {BehaviorSubject, map, take} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
 import {HomeDataService} from "../../services/home-data.service";
 import {OperatingSystem} from "../../../../data/models/enums/operating-system";
@@ -36,28 +36,25 @@ export class HomeDownloadsComponent {
     this.downloadDisabledSubject.next(true);
     document.body.style.cursor = 'wait';
 
-    this.homeDataService.client
-      .pipe(
-        tap(() => console.log('hello')),
-        take(1),
-        switchMap(client => this.clientService.downloadApp(client?.id!, os)),
-        catchError(err => {
-          this.refreshState();
-          return this.notificationService.handleAndShowError(err, 'Cannot download file!');
-        }),
-      )
-      .subscribe((blob: Blob) => {
-        console.log('blob', blob)
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'lanstreamer.zip';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
+    this.homeDataService.client.pipe(
+      take(1),
+      map(client => {
+        const url = this.clientService.getDownloadLink(client?.id!, os); // TODO: dodać sprawdzenie czy url jest valid
+        console.log('url', url)
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'lanstreamer.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+    ).subscribe({
+      complete: () => this.refreshState(),
+      error: err => {
         this.refreshState();
-      });
+        this.notificationService.handleAndShowError(err, 'Cannot download file!');
+      }
+    });
   }
 
   private refreshState(): void {
