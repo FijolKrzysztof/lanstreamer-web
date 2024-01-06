@@ -1,10 +1,24 @@
 .user-component {
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    gap: 1rem;
+  .upload {
+    &-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 1rem;
+    }
+
+    &-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    &-spinner {
+      $size: 20px;
+      width: $size !important;
+      height: $size !important;
+    }
   }
 }

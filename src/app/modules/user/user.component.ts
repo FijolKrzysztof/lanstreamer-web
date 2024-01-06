@@ -5,8 +5,10 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {OperatingSystem} from "../../data/models/enums/operating-system";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {catchError, take} from "rxjs";
+import {BehaviorSubject, catchError, take} from "rxjs";
 import {NotificationService} from "../../services/notification.service";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {AsyncPipe, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-user',
@@ -17,7 +19,10 @@ import {NotificationService} from "../../services/notification.service";
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    NgIf,
+    AsyncPipe
   ],
 })
 export class UserComponent {
@@ -34,12 +39,19 @@ export class UserComponent {
   readonly OperatingSystem = OperatingSystem;
 
   readonly osControl = new FormControl<OperatingSystem>(OperatingSystem.Windows);
+  readonly loading = new BehaviorSubject<boolean>(false);
 
   onFileSelected(fileInputEvent: any) {
+    this.loading.next(true);
     this.adminService.uploadDesktopApp(this.osControl.value!, fileInputEvent.target.files[0]).pipe(
-      catchError(err => this.notificationService.handleAndShowError(err, 'Something went wrong!')),
+      catchError(err => {
+        this.loading.next(false);
+        return this.notificationService.handleAndShowError(err, 'Something went wrong!')
+      }),
       take(1),
-    ).subscribe(); // TODO: dodać potwierdzenie że się udało, oraz ładowanie (spinner)
+    ).subscribe(() => {
+      this.loading.next(false);
+    }); // TODO: dodać potwierdzenie że się udało, oraz ładowanie (spinner)
   }
 
   // TODO: aplikacja się zbyt wolno pobiera
