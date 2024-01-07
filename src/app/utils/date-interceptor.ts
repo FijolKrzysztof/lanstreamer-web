@@ -7,6 +7,8 @@ export class DateInterceptor implements HttpInterceptor {
   constructor() {
   }
 
+  // TODO: sprawdzić czy to działa
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
