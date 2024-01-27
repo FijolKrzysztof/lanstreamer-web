@@ -3,6 +3,9 @@
 .home-footer-component {
   .footer {
     &-container {
+      $border-radius: 5px;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
       display: flex;
       background-color: #ebebe9;
       align-items: center;

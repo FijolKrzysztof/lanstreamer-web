@@ -9,6 +9,10 @@
       background-color: #ebebe9;
       height: fit-content;
       max-width: 700px;
+
+      @include screen-very-wide {
+        padding: 70px 100px;
+      }
     }
 
     &-text {
