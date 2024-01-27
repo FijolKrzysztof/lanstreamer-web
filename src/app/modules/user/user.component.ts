@@ -9,6 +9,7 @@ import {BehaviorSubject, catchError, take} from "rxjs";
 import {NotificationService} from "../../services/notification.service";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-user',
@@ -22,7 +23,8 @@ import {AsyncPipe, NgIf} from "@angular/common";
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    MatIconModule
   ],
 })
 export class UserComponent {
@@ -41,9 +43,16 @@ export class UserComponent {
   readonly osControl = new FormControl<OperatingSystem>(OperatingSystem.Windows);
   readonly loading = new BehaviorSubject<boolean>(false);
 
+  file!: File;
+
   onFileSelected(fileInputEvent: any) {
+    this.file = fileInputEvent.target.files[0];
+    this.uploadFile();
+  }
+
+  uploadFile(): void {
     this.loading.next(true);
-    this.adminService.uploadDesktopApp(this.osControl.value!, fileInputEvent.target.files[0]).pipe(
+    this.adminService.uploadDesktopApp(this.osControl.value!, this.file).pipe(
       catchError(err => {
         this.loading.next(false);
         return this.notificationService.handleAndShowError(err, 'Something went wrong!')
@@ -51,6 +60,8 @@ export class UserComponent {
       take(1),
     ).subscribe(() => {
       this.loading.next(false);
-    }); // TODO: dodać potwierdzenie że się udało, oraz ładowanie (spinner)
+      this.notificationService.showInfoMessage('File uploaded successfully!', 2000);
+      this.file = null!;
+    });
   }
 }

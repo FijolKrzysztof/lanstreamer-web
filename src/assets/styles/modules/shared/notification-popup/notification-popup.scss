@@ -27,7 +27,7 @@
   .popup {
     &-container {
       &.error {
-        @include set-colors($palette-red, 500); // TODO: dostosować kolory
+        @include set-colors($palette-red, 500);
       }
       &.warn {
         @include set-colors($palette-orange, 500);

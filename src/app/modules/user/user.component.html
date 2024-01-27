@@ -3,6 +3,9 @@
     <button type="button" mat-stroked-button (click)="fileInput.click()">Upload Desktop App</button>
     <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
 
+    <button mat-icon-button *ngIf="!(loading | async) && !!file" (click)="uploadFile()">
+      <mat-icon>autorenew</mat-icon>
+    </button>
     <mat-spinner *ngIf="loading | async" class="upload-spinner"></mat-spinner>
   </div>
 

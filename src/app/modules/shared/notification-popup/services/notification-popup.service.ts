@@ -5,6 +5,7 @@ import {Observable, skip} from "rxjs";
 
 export interface NotificationPopupConfig {
   type: 'info' | 'warn' | 'error';
+  autoCloseAfter?: number;
 }
 
 @Injectable({

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from '@angular/core';
 import {Portal, PortalModule} from "@angular/cdk/portal";
 import {NotificationPopupDataService} from "./services/notification-popup-data.service";
 import {Observable} from "rxjs";
@@ -15,7 +15,7 @@ import {NgClass} from "@angular/common";
   imports: [PortalModule, MatButtonModule, MatIconModule, NgClass],
   providers: [NotificationPopupDataService],
 })
-export class NotificationPopupComponent<T, R = T> {
+export class NotificationPopupComponent<T, R = T> implements OnInit {
 
   constructor(
     private readonly notificationDataService: NotificationPopupDataService<T, R>,
@@ -26,7 +26,7 @@ export class NotificationPopupComponent<T, R = T> {
   private readonly className = 'notification-popup-component'
 
   portalOutlet!: Portal<any>;
-  config: NotificationPopupConfig | undefined; // TODO: kolorowanie na podstawie theme lub przekazywanie koloru zamiast theme
+  config: NotificationPopupConfig | undefined;
 
   readonly emitData$: Observable<R> = this.notificationDataService.emitDataSubject.asObservable();
   readonly closePopup$ = this.notificationDataService.closePopupSubject.asObservable();
@@ -45,5 +45,18 @@ export class NotificationPopupComponent<T, R = T> {
 
   close(): void {
     this.notificationDataService.closePopup();
+  }
+
+  ngOnInit() {
+    this.autoCloseAfter();
+  }
+
+  private autoCloseAfter(): void {
+    const autoCloseAfter = this.config?.autoCloseAfter;
+    if (autoCloseAfter) {
+      setTimeout(() => {
+        this.close();
+      }, autoCloseAfter);
+    }
   }
 }
