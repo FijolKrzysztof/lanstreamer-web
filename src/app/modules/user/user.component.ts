@@ -53,7 +53,4 @@ export class UserComponent {
       this.loading.next(false);
     }); // TODO: dodać potwierdzenie że się udało, oraz ładowanie (spinner)
   }
-
-  // TODO: aplikacja się zbyt wolno pobiera
-
 }
