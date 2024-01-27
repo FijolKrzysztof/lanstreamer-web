@@ -13,6 +13,7 @@
       }
       @include screen-wider-than(1500px) {
         transform: scale(1.2);
+        margin-top: -40px;
       }
     }
 

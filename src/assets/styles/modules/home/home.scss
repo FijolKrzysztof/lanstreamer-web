@@ -65,6 +65,10 @@
     margin: 2.5rem;
     align-self: center;
 
+    @include screen-very-wide {
+      width: 80%;
+    }
+
     @include screen-narrower-than($screen-very-narrow) {
       margin: 1rem;
     }
