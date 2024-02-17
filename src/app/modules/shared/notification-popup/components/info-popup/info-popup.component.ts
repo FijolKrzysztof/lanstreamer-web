@@ -11,7 +11,6 @@ interface InfoPopupData {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './info-popup.component.html',
-  styleUrls: ['./info-popup.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoPopupComponent {
