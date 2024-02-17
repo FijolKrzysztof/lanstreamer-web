@@ -34,13 +34,15 @@ export class HomeTabsComponent implements AfterViewInit {
   autoSwitchStep = 1;
 
   ngAfterViewInit() {
+    this.playVideo();
     this.animateTabs();
   }
 
-  onTabChange() {
+  playVideo() {
     const videoPlayers = document.getElementsByClassName('presentation-video');
     for (const videoPlayerKey in videoPlayers) {
       const videoPlayer: HTMLVideoElement = videoPlayers[videoPlayerKey] as HTMLVideoElement;
+      console.log('player', videoPlayer);
       if (typeof videoPlayer.play !== 'undefined') {
         videoPlayer.play().catch(err => console.error(err));
       }
