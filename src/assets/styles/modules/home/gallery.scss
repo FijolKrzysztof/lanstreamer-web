@@ -23,11 +23,21 @@
       box-shadow: 0 0 5px #000;
       object-fit: contain;
       height: fit-content;
+      transition: all 0.2s ease-in;
+
+      @mixin on-hover {
+        &:hover {
+          z-index: 4;
+          transform: scale(1.1);
+        }
+      }
 
       &.preview {
         z-index: 3;
         width: 300px;
         right: 30px;
+
+        @include on-hover;
       }
 
       &.videos {
@@ -35,6 +45,8 @@
         z-index: 2;
         right: 190px;
         top: 150px;
+
+        @include on-hover;
       }
 
       &.sorting {
@@ -42,6 +54,8 @@
         z-index: 1;
         right: 60px;
         top: 170px;
+
+        @include on-hover;
       }
     }
   }

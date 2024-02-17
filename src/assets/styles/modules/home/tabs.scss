@@ -1,9 +1,16 @@
 @import "../../utils/index";
 @import "../../palettes/index";
+@import "../../config/index";
 
 .home-tabs-component {
   .mdc-tab {
     font-size: .7rem !important;
+  }
+
+  .mat-mdc-tab-body-wrapper {
+    border-radius: 10px;
+
+    @include set-box-shadow($palette-primary);
   }
 
   .presentation {
@@ -32,7 +39,6 @@
       border-radius: 10px;
       overflow: hidden;
 
-      @include set-colors($palette-grey, 100);
       @include screen-narrow {
         padding: 10px;
       }

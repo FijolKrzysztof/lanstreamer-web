@@ -1,4 +1,4 @@
-@import "screen-sizes";
+@import "../config/screen";
 
 @mixin screen-very-narrow {
   @media (max-width: $screen-very-narrow) {

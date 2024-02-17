@@ -53,8 +53,10 @@
 
   .home-container {
     min-height: 100vh;
-
-    @include set-colors($palette-grey, 50);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, .6) 100%),
+    url("../../../images/white-wallpaper.png");
   }
 
   .container-fluid {
@@ -77,9 +79,29 @@
   }
 
   .title {
+    display: flex;
+    justify-content: center;
     font-size: 1rem;
     line-height: 1rem;
     font-weight: bold;
     margin: 0;
+
+    &-text {
+      width: fit-content;
+      position: relative;
+
+      &:after {
+        $height: 3px;
+
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -$height;
+        width: 100%;
+        height: $height;
+
+        @include set-colors($palette-primary, 200);
+      }
+    }
   }
 }

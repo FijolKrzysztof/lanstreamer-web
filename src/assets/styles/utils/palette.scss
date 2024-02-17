@@ -1,0 +1,16 @@
+@mixin set-colors($palette, $color) {
+  color: map-get(map-get($palette, contrast), $color);
+  background-color: map-get($palette, $color);
+}
+
+@mixin set-gradient($palette) {
+  background: linear-gradient(270deg, rgba(get-color($palette, 100), .8) 10%, rgba(get-color($palette, 50), .4) 100%);
+}
+
+@mixin set-box-shadow($palette) {
+  box-shadow: 0 0 10px -6px;
+}
+
+@function get-color($palette, $color) {
+  @return map-get($palette, $color);
+}

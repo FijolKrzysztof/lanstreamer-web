@@ -1,4 +1,0 @@
-@mixin set-colors($palette, $color) {
-  color: map-get(map-get($palette, contrast), $color);
-  background-color: map-get($palette, $color);
-}
