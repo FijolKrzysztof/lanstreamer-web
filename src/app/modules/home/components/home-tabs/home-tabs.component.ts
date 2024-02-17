@@ -42,7 +42,6 @@ export class HomeTabsComponent implements AfterViewInit {
     const videoPlayers = document.getElementsByClassName('presentation-video');
     for (const videoPlayerKey in videoPlayers) {
       const videoPlayer: HTMLVideoElement = videoPlayers[videoPlayerKey] as HTMLVideoElement;
-      console.log('player', videoPlayer);
       if (typeof videoPlayer.play !== 'undefined') {
         videoPlayer.play().catch(err => console.error(err));
       }
